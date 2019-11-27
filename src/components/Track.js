@@ -6,7 +6,7 @@ import "./styles/Track.css";
 // Here we use destructuring to extract the props into separate variables
 // See https://wesbos.com/destructuring-objects/
 
-const Track = ({id, title, artist, playtime, albumart, favorite, toggleFavorite, sendToTop}) => {
+const Track = ({id, title, artist, playtime, albumart, favorite, toggleFavorite, sendToTop, switchLists}) => {
 
   const ontoggleFavorite = () => {
     toggleFavorite(id);
@@ -14,6 +14,10 @@ const Track = ({id, title, artist, playtime, albumart, favorite, toggleFavorite,
 
   const onsendToTop = () => {
     sendToTop(id);
+  }
+
+  const onswitchLists = () => {
+    switchLists(id)
   }
 
   return (
@@ -36,6 +40,7 @@ const Track = ({id, title, artist, playtime, albumart, favorite, toggleFavorite,
       </button>
       <button
         className="track--control track--switch"
+        onClick={onswitchLists}
         >
         <span role="img" aria-label="switch lists">↔</span>
       </button>
@@ -52,6 +57,7 @@ Track.propTypes = {
   favorite: PropTypes.bool,
   toggleFavorite: PropTypes.func.isRequired,
   sendToTop: PropTypes.func.isRequired,
+  switchLists: PropTypes.func.isRequired,
 }
 
 Track.defaultProps = {

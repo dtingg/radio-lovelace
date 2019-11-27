@@ -38,6 +38,10 @@ const Playlist = (props) => {
     props.sendToTop(id);
   }
 
+  const onswitchLists = (id) => {
+    props.switchLists(id);
+  }
+
   const trackElements = tracks.map((track, i) => {
     // We use "spread syntax" here to pass in all the properties of 
     // the variable 'track' as props. Go look it up!
@@ -47,6 +51,7 @@ const Playlist = (props) => {
       {...track}
       toggleFavorite={ ontoggleFavorite }
       sendToTop={ onsendToTop }
+      switchLists={ onswitchLists }
     />
     );
   });
@@ -69,6 +74,7 @@ Playlist.propTypes = {
   side: PropTypes.string,
   toggleFavorite: PropTypes.func.isRequired,
   sendToTop: PropTypes.func.isRequired,
+  switchLists: PropTypes.func.isRequired,
 }
 
 export default Playlist;

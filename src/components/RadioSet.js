@@ -53,6 +53,27 @@ class RadioSet extends React.Component {
     })
   }
 
+  switchLists = (trackId) => {
+    const {playlists} = this.state;
+    let trackToUpdate = playlists.morningTracks.find((track => track.id === trackId));
+    let oldPlaylist = playlists.morningTracks
+    let newPlaylist = playlists.eveningTracks
+
+    if (trackToUpdate === undefined) {
+      trackToUpdate = playlists.eveningTracks.find((track => track.id === trackId));
+      oldPlaylist = playlists.eveningTracks
+      newPlaylist = playlists.morningTracks
+    }
+
+    const trackIndex = oldPlaylist.indexOf(trackToUpdate)
+    oldPlaylist.splice(trackIndex, 1)
+    newPlaylist.unshift(trackToUpdate)
+
+    this.setState({
+      playlists,
+    })
+  }
+
   render () {
     return (
       <div className="radio-set">
@@ -62,12 +83,14 @@ class RadioSet extends React.Component {
             tracks={this.state.playlists.morningTracks}
             toggleFavorite={ this.toggleFavorite }
             sendToTop={ this.sendToTop }
+            switchLists={ this.switchLists }
           />
           <Playlist
             side="Evening"
             tracks={this.state.playlists.eveningTracks}
             toggleFavorite={ this.toggleFavorite }
             sendToTop={ this.sendToTop }
+            switchLists={ this.switchLists }
           />
         </section>
       </div>
